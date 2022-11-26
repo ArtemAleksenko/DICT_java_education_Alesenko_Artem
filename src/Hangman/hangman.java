@@ -21,15 +21,15 @@ public class hangman {
         String[] w = new String[]{};
         String randomWord = words.get(random.nextInt(words.size()));
         w = randomWord.split("");
-        System.out.println(Arrays.toString(w));
+//        System.out.println(Arrays.toString(w));
 
         int times = 8;
         // тут мы делаем пустой масив длинной с масив 1 и заполняем его прочерками
         String[] unshown = new String[w.length];
-        for(int i = 0; i < unshown.length; i++){
+        for (int i = 0; i < unshown.length; i++) {
             unshown[i] = "-";
         }
-        while (times > 0){
+        while (times > 0) {
             AtomicBoolean check = new AtomicBoolean(false);
             boolean checkEnter = false;
             System.out.println(Arrays.toString(unshown));
@@ -38,31 +38,35 @@ public class hangman {
             leter = scanner.nextLine();
 //            System.out.println(randomWord.indexOf(later));
 
-            if(randomWord.contains(leter)) {
-                for (int i = 0; i < randomWord.length(); i++){
+            if (randomWord.contains(leter)) {
+                for (int i = 0; i < randomWord.length(); i++) {
                     if (randomWord.charAt(i) == leter.charAt(0) && unshown[i].equals("-")) {
                         unshown[i] = leter;
                         checkEnter = true;
                     }
                 }
-                if (!checkEnter){
+                if (!checkEnter) {
+                    System.out.println("No improvements");
                     times--;
                 }
                 Arrays.stream(unshown).forEach(item -> {
-                    if(item.equals("-")) check.set(true);
+                    if (item.equals("-")) check.set(true);
                 });
-                if(!check.get()){
+                if (!check.get()) {
+                    System.out.println(Arrays.toString(unshown));
+                    System.out.println("You guessed the word!\n" +
+                            "You survived!");
                     break;
                 }
-            }
-            else{
+            } else {
                 System.out.println("That letter doesn`t appear in the word");
-                times --;
+                times--;
             }
 
         }
-        System.out.println("Thanks for playing!\n" +
-                "We`ll see how well you did in the next stage");
-
+        if (times == 0) {
+            System.out.println(Arrays.toString(unshown));
+            System.out.println("You loss!");
+        }
     }
 }
