@@ -5,69 +5,116 @@ import java.util.Scanner;
 public class coffeMachine {
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
-        // Вода
-        System.out.println("Write how many ml of water the coffee machine has: ");
+        // стартовый инвентарь
+        int startedMoney = 550;
+        int startedWater = 400;
+        int startedMilk = 540;
+        int startedCoffeBeans = 120;
+        int startedCups = 9;
+        // вывод инвентаря кофе машины
+        System.out.println("The coffee machine has:");
+        System.out.println(startedWater + " of water");
+        System.out.println(startedMilk + " of milk");
+        System.out.println(startedCoffeBeans + " of coffee beans");
+        System.out.println(startedCups + " of disposable cups");
+        System.out.println(startedMoney + " of money");
+        System.out.println();
+        // выбор режима
+        System.out.println("Write action(buy, fill, take):");
         System.out.print("> ");
-        int water = scanner.nextInt();
-        //молоко
-        System.out.println("Write how many ml of milk the coffee machine has: ");
-        System.out.print("> ");
-        int milk = scanner.nextInt();
-        //зёрна
-        System.out.println("Write how many grams of coffee beans the coffee machine has: ");
-        System.out.print("> ");
-        int coffeeBeans = scanner.nextInt();
-        //чашки
-        System.out.println("Write how many cups of coffee you will need: ");
-        System.out.print("> ");
-        int cups = scanner.nextInt();
-        //Сколько получится ингридиентов
-        int difference1 = 0;
-        int difference2 = 0;
-        int realNumberWater = water/200;
-        int realNumberMilk = milk/50;
-        int realNumberCoffeeBeans = coffeeBeans/15;
-        //варианты ответа
-        if (water<200 || milk<50 || coffeeBeans<15){
-            System.out.println("No, I can make only 0 cups of coffee");
-        }
-        else if(water==200 || milk==50 || coffeeBeans==15){
-            System.out.println("Yes, I can make that amount of coffee");
-        }
-        else if(water>200 & milk>50 & coffeeBeans>15){
-            //сравнение 2 показателей
-            if(realNumberWater>cups & realNumberWater>cups & realNumberCoffeeBeans>cups) {
-                if (realNumberMilk > realNumberWater) {
-                    difference1 += realNumberWater;
+        String mode = scanner.nextLine();
+        switch (mode){
+            case "buy":{
+                System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino: ");
+                int nameCoffee = scanner.nextInt();
+                System.out.println("The coffee machine has:");
+                switch (nameCoffee){
+                    case 1:{
+                        int becamWater = startedWater - 250;
+                        int becamCoffeeBeans = startedCoffeBeans - 16;
+                        int becamCups = startedCups - 1;
+                        int becamMoney = startedMoney + 4;
+                        System.out.println(becamWater + " of water");
+                        System.out.println(startedMilk + " of milk");
+                        System.out.println(becamCoffeeBeans + " of coffee beans");
+                        System.out.println(becamCups + " of disposable cups");
+                        System.out.println(becamMoney + " of money");
+                        break;
+                    }
+                    case 2:{
+                        int becamWater = startedWater - 350;
+                        int becamMilk = startedMilk - 75;
+                        int becamCoffeeBeans = startedCoffeBeans - 20;
+                        int becamCups = startedCups - 1;
+                        int becamMoney = startedMoney + 7;
+                        System.out.println(becamWater + " of water");
+                        System.out.println(becamMilk + " of milk");
+                        System.out.println(becamCoffeeBeans + " of coffee beans");
+                        System.out.println(becamCups + " of disposable cups");
+                        System.out.println(becamMoney + " of money");
+                        break;
+                    }
+                    case 3:{
+                        int becamWater = startedWater - 200;
+                        int becamMilk = startedMilk - 100;
+                        int becamCoffeeBeans = startedCoffeBeans - 12;
+                        int becamCups = startedCups - 1;
+                        int becamMoney = startedMoney + 6;
+                        System.out.println(becamWater + " of water");
+                        System.out.println(becamMilk + " of milk");
+                        System.out.println(becamCoffeeBeans + " of coffee beans");
+                        System.out.println(becamCups + " of disposable cups");
+                        System.out.println(becamMoney + " of money");
+                        break;
+                    }
+                    default:{
+                        System.out.println("Incorrect input");
+                        break;
+                    }
                 }
-                else {
-                    difference1 += realNumberMilk;
-                }
-                //сравнение 1 показателя с зернами
-                if (difference1 > realNumberCoffeeBeans) {
-                    difference2 += realNumberCoffeeBeans;
-                } else {
-                    difference2 += difference1;
-                }
-                difference2 -= cups;
-                System.out.println("Yes, I can make that amount of coffee (and even " + difference2 + " more than that)");
+                break;
             }
-            else{
-                //первая часть сравнения
-                if(realNumberMilk>realNumberWater){
-                    difference1 += realNumberWater;
-                }
-                else{
-                    difference1 += realNumberMilk;
-                }
-                //вторая часть сровнения
-                if (difference1>realNumberCoffeeBeans){
-                    difference2 += realNumberCoffeeBeans;
-                }
-                else{
-                    difference2 += difference1;
-                }
-                System.out.println("No, I can make only "+ difference2 +" cups of coffee");
+            case "fill":{
+                System.out.println("Write how many ml of water you want to add: ");
+                System.out.print("> ");
+                int newWater = scanner.nextInt();
+                System.out.println("Write how many ml of milk you want to add:");
+                System.out.print("> ");
+                int newMilk = scanner.nextInt();
+                System.out.println("Write how many grams of coffee beans you want to add:");
+                System.out.print("> ");
+                int newCoffeeBeans = scanner.nextInt();
+                System.out.println("Write how many disposable coffee cups you want to add:");
+                System.out.print("> ");
+                int newCups = scanner.nextInt();
+                //добавление новых ресурсов
+                newWater += startedWater;
+                newMilk += startedMilk;
+                newCoffeeBeans += startedCoffeBeans;
+                newCups += startedCups;
+                //вывод данных
+                System.out.println("The coffee machine has: ");
+                System.out.println(newWater + " of water");
+                System.out.println(newMilk + " of milk");
+                System.out.println(newCoffeeBeans + " of coffee beans");
+                System.out.println(newCups + " of disposable cups");
+                System.out.println(startedMoney + " of money");
+                break;
+            }
+            case "take":{
+                System.out.println("I gave you "+ startedMoney);
+                System.out.println();
+                System.out.println("The coffee machine has:");
+                System.out.println(startedWater + " of water");
+                System.out.println(startedMilk + " of milk");
+                System.out.println(startedCoffeBeans + " of coffee beans");
+                System.out.println(startedCups + " of disposable cups");
+                System.out.println(0 + " of money");
+                break;
+            }
+            default:{
+                System.out.println("Incorrect input");
+                break;
             }
         }
     }
